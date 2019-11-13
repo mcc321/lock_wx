@@ -4,7 +4,6 @@ const app = getApp()
 
 Page({
   data: {
-    motto: 'Hello World',
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
@@ -13,34 +12,12 @@ Page({
     code: '',
   },
   //事件处理函数
-  bindViewTap: function () {
-    wx.request({
-      url: 'https://www.wyt.cloud/wx_auth/wx_login',
-      method: "POST",//指定请求方式，默认get
-      data: { "code": app.globalData.code, "encrypted_data": app.globalData.encryptedData, "iv": app.globalData.iv },
-      success: function (res) {
-        console.log(res.data)
-      }
-    });
-    wx.switchTab({
-      url: '../main/main'
-    })
-  },
   onLoad: function () {
     if (app.globalData.userInfo && app.globalData.iv && app.globalData.encryptedData && app.globalData.code) {
       this.setData({
         userInfo: app.globalData.userInfo,
-        hasUserInfo: true
-      })
-      this.setData({
         iv: app.globalData.iv,
-        hasUserInfo: true
-      })
-      this.setData({
         encryptedData: app.globalData.encryptedData,
-        hasUserInfo: true
-      })
-      this.setData({
         code: app.globalData.code,
         hasUserInfo: true
       })
@@ -50,17 +27,8 @@ Page({
       app.userInfoReadyCallback = res => {
         this.setData({
           userInfo: res.userInfo,
-          hasUserInfo: true
-        })
-        this.setData({
-          iv: app.globalData.iv,
-          hasUserInfo: true
-        })
-        this.setData({
-          encryptedData: app.globalData.encryptedData,
-          hasUserInfo: true
-        })
-        this.setData({
+          iv: res.iv,
+          encryptedData: res.encryptedData,
           code: app.globalData.code,
           hasUserInfo: true
         })
@@ -69,24 +37,15 @@ Page({
       // 在没有 open-type=getUserInfo 版本的兼容处理
       wx.getUserInfo({
         success: res => {
-          app.globalData.userInfo = res.userInfo
-          app.globalData.code = res.code
+          this.data.userInfo = res.userInfo
+          this.data.code = app.globalData.code
           app.globalData.iv = res.iv
           app.globalData.encryptedData = res.encryptedData
           this.setData({
-            userInfo: res.userInfo,
-            hasUserInfo: true
-          })
-          this.setData({
-            iv: app.globalData.iv,
-            hasUserInfo: true
-          })
-          this.setData({
-            encryptedData: app.globalData.encryptedData,
-            hasUserInfo: true
-          })
-          this.setData({
             code: app.globalData.code,
+            userInfo: app.globalData.userInfo,
+            iv: app.globalData.iv,
+            encryptedData: app.globalData.encryptedData,
             hasUserInfo: true
           })
         }
@@ -100,5 +59,19 @@ Page({
       userInfo: e.detail.userInfo,
       hasUserInfo: true
     })
-  }
+  },
+  bindViewTap: function () {
+    console.log(this.data.iv)
+    wx.request({
+      url: 'https://www.wyt.cloud/wx_auth/wx_login',
+      method: "POST",//指定请求方式，默认get
+      data: { "code": this.data.code, "encrypted_data":     this.data.encryptedData, "iv": this.data.iv },
+      success: function (res) {
+        console.log(res.data)
+      }
+    });
+    wx.switchTab({
+      url: '../main/main'
+    })
+  },
 })
