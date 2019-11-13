@@ -1,0 +1,5 @@
+<view class="container">
+    <view class="journey-container" bindtap="copyTBL">
+      <text class="journey">点击复制监控链接</text>
+    </view>
+</view>

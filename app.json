@@ -2,7 +2,8 @@
   "pages": [
     "pages/index/index",
     "pages/logs/logs",
-    "pages/main/main"
+    "pages/main/main",
+    "pages/camera/camera"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -26,7 +27,7 @@
       {
         "selectedIconPath": "images/monitor.png",
         "iconPath": "images/monitor_un.png",
-        "pagePath": "pages/logs/logs",
+        "pagePath": "pages/camera/camera",
         "text": "监控"
       }
     ]
