@@ -40,6 +40,9 @@ App({
     userInfo: null,
     code: null,
     iv: null,
-    encryptedData: null
+    encryptedData: null,
+    cookie:null,
+    url: null,
+    get_url:false
   }
 })

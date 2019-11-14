@@ -10,6 +10,7 @@ Page({
     iv: '',
     encryptedData: '',
     code: '',
+    cookie:'',
   },
   //事件处理函数
   onLoad: function () {
@@ -37,15 +38,15 @@ Page({
       // 在没有 open-type=getUserInfo 版本的兼容处理
       wx.getUserInfo({
         success: res => {
-          this.data.userInfo = res.userInfo
-          this.data.code = app.globalData.code
+          app.globalData.userInfo = res.userInfo
+          app.globalData.code = app.globalData.code
           app.globalData.iv = res.iv
           app.globalData.encryptedData = res.encryptedData
           this.setData({
             code: app.globalData.code,
-            userInfo: app.globalData.userInfo,
-            iv: app.globalData.iv,
-            encryptedData: app.globalData.encryptedData,
+            userInfo: res.userInfo,
+            iv: res.iv,
+            encryptedData: res.encryptedData,
             hasUserInfo: true
           })
         }
@@ -55,8 +56,13 @@ Page({
   getUserInfo: function (e) {
     console.log(e)
     app.globalData.userInfo = e.detail.userInfo
+    app.globalData.iv=e.detail.iv
+    app.globalData.encryptedData=e.detail.encryptedData
     this.setData({
       userInfo: e.detail.userInfo,
+      iv:e.detail.iv,
+      code:app.globalData.code,
+      encryptedData:e.detail.encryptedData,
       hasUserInfo: true
     })
   },
@@ -67,7 +73,8 @@ Page({
       method: "POST",//指定请求方式，默认get
       data: { "code": this.data.code, "encrypted_data":     this.data.encryptedData, "iv": this.data.iv },
       success: function (res) {
-        console.log(res.data)
+        console.log(res.header["Set-Cookie"])
+        app.globalData.cookie = res.header["Set-Cookie"]
       }
     });
     wx.switchTab({
