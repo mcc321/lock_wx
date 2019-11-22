@@ -3,12 +3,14 @@
     "pages/index/index",
     "pages/logs/logs",
     "pages/main/main",
-    "pages/camera/camera"
+    "pages/camera/camera",
+    "pages/qrcode/qrcode",
+    "pages/authorization/authorization"
   ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "WeChat",
+    "navigationBarTitleText": "无序熵增",
     "navigationBarTextStyle": "black"
   },
   "style": "v2",
@@ -29,6 +31,18 @@
         "iconPath": "images/monitor_un.png",
         "pagePath": "pages/camera/camera",
         "text": "监控"
+      },
+      {
+        "selectedIconPath": "images/qrcode.png",
+        "iconPath": "images/qrcode_un.png",
+        "pagePath": "pages/qrcode/qrcode",
+        "text": "二维码"
+      },
+      {
+        "selectedIconPath": "images/authorization.png",
+        "iconPath": "images/authorization_un.png",
+        "pagePath": "pages/authorization/authorization",
+        "text": "授权"
       }
     ]
   }

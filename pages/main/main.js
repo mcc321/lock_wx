@@ -50,7 +50,7 @@ Page({
           })
         } else {
           wx.showToast({
-            title: '权限不足',
+            title: '失败',
             icon: 'fail',
             duration: 1000,
             mask: true

@@ -6,15 +6,20 @@
     background-color:#b3d4db;
 }
 
-.avatar{
+/* .avatar{
     width:200rpx;
     height:200rpx;
     margin-top:160rpx;
     border-radius:50%;
-}
+} */
 
 .motto{
     margin-top:100rpx;
+    font-size:32rpx;
+    font-weight: bold;
+}
+
+.motto1{
     font-size:32rpx;
     font-weight: bold;
 }
