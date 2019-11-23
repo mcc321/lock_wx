@@ -17,14 +17,14 @@ Page({
       success: function (res) {
         if (res.data.info =="success") {
           wx.showToast({
-            title: '成功',
+            title: res.data.tip,
             icon: 'succes',
             duration: 1000,
             mask: true
           })
         } else {
           wx.showToast({
-            title: '权限不足',
+            title: res.data.tip,
             icon: 'fail',
             duration: 1000,
             mask: true
